@@ -1,0 +1,10 @@
+[package]
+name = "ipinfo-rs"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = "4.5.41"
+reqwest = "0.12.22"
+serde_json = { version = "1.0.141", features = ["preserve_order"] }
+tokio = { version = "1.47.0", features = ["macros", "rt-multi-thread"] }
