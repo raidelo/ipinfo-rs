@@ -9,22 +9,24 @@ pub enum IpTarget {
 }
 
 pub async fn get_info(ip: &IpTarget) -> Result<reqwest::Response, reqwest::Error> {
-    let mut url = reqwest::Url::parse(HOST).unwrap();
-    let mut segments = url.path_segments_mut().unwrap();
+    let mut url = reqwest::Url::parse(HOST).expect("Valid hardcoded URL");
 
-    segments.push(ENDPOINT);
+    {
+        let mut segments = url
+            .path_segments_mut()
+            .expect("Valid hardcoded URL. Should perfectly be a base");
 
-    if let IpTarget::Specific(ip_addr) = ip {
-        segments.push(&ip_addr.to_string());
+        segments.push(ENDPOINT);
+
+        if let IpTarget::Specific(ip_addr) = ip {
+            segments.push(&ip_addr.to_string());
+        }
     }
 
-    drop(segments);
-
-    reqwest::ClientBuilder::new()
+    let client = reqwest::ClientBuilder::new()
+        .user_agent(format!("ipinfo-rs/{}", env!("CARGO_PKG_VERSION")))
         .timeout(Duration::from_millis(TIMEOUT))
-        .build()?
-        .get(url)
-        .send()
-        .await?
-        .error_for_status()
+        .build()?;
+
+    client.get(url).send().await?.error_for_status()
 }

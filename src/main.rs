@@ -37,9 +37,11 @@ async fn run() -> Result<(), Box<dyn Error>> {
             "double" => TableStyle::ThinDouble,
             "thick" => TableStyle::Thick,
             "basic" => TableStyle::Basic,
-            _ => unreachable!(),
+            _ => unreachable!(
+                "Impossible style variant - clap validates against: thin|rounded|double|thick|basic"
+            ),
         })
-        .expect("style should always have a value (default or user-provided)");
+        .expect("Style guaranteed by clap's default_value");
 
     let response: reqwest::Response = get_info(&ip).await.map_err(map_reqwest_error)?;
 
@@ -47,7 +49,31 @@ async fn run() -> Result<(), Box<dyn Error>> {
 
     let info: serde_json::Value = serde_json::from_str(&body)?;
 
-    let object = info.as_object().ok_or("invalid response from the server")?;
+    let object = info.as_object().ok_or_else(|| {
+        let response_type = match info {
+            serde_json::Value::Null => "null",
+            serde_json::Value::Bool(_) => "bool",
+            serde_json::Value::String(_) => "string",
+            serde_json::Value::Number(_) => "number",
+            serde_json::Value::Array(_) => "array",
+            serde_json::Value::Object(_) => {
+                unreachable!("If it was an object, .as_object() should have succeeded")
+            }
+        };
+
+        format!(
+            "Invalid API response: expected object, got: {}",
+            response_type
+        )
+    })?;
+
+    if object.is_empty() {
+        return Err("API returned empty response. Possible causes:\n\
+              • Invalid IP address format
+              • No fields specified in API request
+              • Temporary server issue"
+            .into());
+    };
 
     let table_formatted = get_table_formatted(object, style);
 
@@ -79,6 +105,9 @@ fn map_reqwest_error(err: reqwest::Error) -> String {
         "\u{01f4e6} Data error: Failed to process server response".to_string()
     } else if let Some(status) = err.status() {
         match status {
+            s if s.is_client_error() && s.as_u16() == 429 => format!(
+                "\u{01f40c} API limit exceeded: You've reached ip-api.com's free tier limit (45 reqs/min)"
+            ),
             s if s.is_client_error() => format!(
                 "\u{01f464} Client error ({}){}",
                 s,
