@@ -20,9 +20,11 @@ pub async fn get_info(ip: &IpTarget) -> Result<reqwest::Response, reqwest::Error
 
     drop(segments);
 
-    let client = reqwest::Client::builder()
+    reqwest::ClientBuilder::new()
         .timeout(Duration::from_millis(TIMEOUT))
-        .build()?;
-
-    client.get(url).send().await?.error_for_status()
+        .build()?
+        .get(url)
+        .send()
+        .await?
+        .error_for_status()
 }
