@@ -1,4 +1,4 @@
-use crate::TableStyle;
+use crate::{TableChars, TableStyle};
 
 use serde_json::{Map, Value};
 
@@ -13,7 +13,7 @@ pub fn get_table_formatted(data: &Map<String, Value>, style: TableStyle) -> Stri
 
     let mut output = String::new();
 
-    let (
+    let TableChars {
         upper_left,
         upper_medium,
         upper_right,
@@ -25,7 +25,7 @@ pub fn get_table_formatted(data: &Map<String, Value>, style: TableStyle) -> Stri
         lower_right,
         horizontal,
         vertical,
-    ) = style.get_chars();
+    } = style.get_chars();
 
     // upper line
     output.push(upper_left);
