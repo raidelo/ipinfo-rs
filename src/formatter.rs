@@ -1,4 +1,4 @@
-use crate::{TableChars, TableStyle};
+use crate::TableStyle;
 
 use serde_json::{Map, Value};
 
@@ -13,30 +13,18 @@ pub fn get_table_formatted(data: &Map<String, Value>, style: TableStyle) -> Stri
 
     let mut output = String::new();
 
-    let TableChars {
-        upper_left,
-        upper_medium,
-        upper_right,
-        medium_left,
-        medium_medium,
-        medium_right,
-        lower_left,
-        lower_medium,
-        lower_right,
-        horizontal,
-        vertical,
-    } = style.get_chars();
+    let chars = style.get_chars();
 
     // upper line
-    output.push(upper_left);
+    output.push(chars.upper_left);
     for _ in 0..max_key_len {
-        output.push(horizontal);
+        output.push(chars.horizontal);
     }
-    output.push(upper_medium);
+    output.push(chars.upper_medium);
     for _ in 0..max_value_len {
-        output.push(horizontal);
+        output.push(chars.horizontal);
     }
-    output.push(upper_right);
+    output.push(chars.upper_right);
     output.push('\n');
 
     for (pos, (key, value)) in data.iter().enumerate() {
@@ -46,38 +34,38 @@ pub fn get_table_formatted(data: &Map<String, Value>, style: TableStyle) -> Stri
         };
 
         // row
-        output.push(vertical);
+        output.push(chars.vertical);
         output.push_str(&format!("{:^max_key_len$}", key));
-        output.push(vertical);
+        output.push(chars.vertical);
         output.push_str(&format!("{:^max_value_len$}", value));
-        output.push(vertical);
+        output.push(chars.vertical);
         output.push('\n');
 
         // medium line
         if pos < size - 1 {
-            output.push(medium_left);
+            output.push(chars.medium_left);
             for _ in 0..max_key_len {
-                output.push(horizontal);
+                output.push(chars.horizontal);
             }
-            output.push(medium_medium);
+            output.push(chars.medium_medium);
             for _ in 0..max_value_len {
-                output.push(horizontal);
+                output.push(chars.horizontal);
             }
-            output.push(medium_right);
+            output.push(chars.medium_right);
             output.push('\n');
         }
     }
 
     // lower line
-    output.push(lower_left);
+    output.push(chars.lower_left);
     for _ in 0..max_key_len {
-        output.push(horizontal);
+        output.push(chars.horizontal);
     }
-    output.push(lower_medium);
+    output.push(chars.lower_medium);
     for _ in 0..max_value_len {
-        output.push(horizontal);
+        output.push(chars.horizontal);
     }
-    output.push(lower_right);
+    output.push(chars.lower_right);
     output.push('\n');
 
     output
