@@ -1,3 +1,23 @@
+pub struct TableChars {
+    pub upper_left: char,
+    pub upper_medium: char,
+    pub upper_right: char,
+    pub medium_left: char,
+    pub medium_medium: char,
+    pub medium_right: char,
+    pub lower_left: char,
+    pub lower_medium: char,
+    pub lower_right: char,
+    pub horizontal: char,
+    pub vertical: char,
+}
+
+impl TableChars {
+    pub fn new(style: TableStyle) -> TableChars {
+        style.get_chars()
+    }
+}
+
 pub enum TableStyle {
     Thin,
     ThinRounded,
@@ -7,79 +27,76 @@ pub enum TableStyle {
 }
 
 impl TableStyle {
-    pub fn get_chars(
-        &self,
-    ) -> (
-        char,
-        char,
-        char,
-        char,
-        char,
-        char,
-        char,
-        char,
-        char,
-        char,
-        char,
-    ) {
+    pub fn get_chars(&self) -> TableChars {
         match self {
-            Self::Thin => (
-                '\u{250C}', // UpperL
-                '\u{252C}', // UpperM
-                '\u{2510}', // UpperR
-                '\u{251C}', // MediumL
-                '\u{253C}', // MediumM
-                '\u{2524}', // MediumR
-                '\u{2514}', // LowerL
-                '\u{2534}', // LowerM
-                '\u{2518}', // LowerR
-                '\u{2500}', // Horizontal
-                '\u{2502}', // Vertical
-            ),
+            Self::Thin => TableChars {
+                upper_left: '\u{250C}',
+                upper_medium: '\u{252C}',
+                upper_right: '\u{2510}',
+                medium_left: '\u{251C}',
+                medium_medium: '\u{253C}',
+                medium_right: '\u{2524}',
+                lower_left: '\u{2514}',
+                lower_medium: '\u{2534}',
+                lower_right: '\u{2518}',
+                horizontal: '\u{2500}',
+                vertical: '\u{2502}',
+            },
 
-            Self::Thick => (
-                '\u{250F}', // UpperL
-                '\u{2533}', // UpperM
-                '\u{2513}', // UpperR
-                '\u{2523}', // MediumL
-                '\u{254B}', // MediumM
-                '\u{252B}', // MediumR
-                '\u{2517}', // LowerL
-                '\u{253B}', // LowerM
-                '\u{251B}', // LowerR
-                '\u{2501}', // Horizontal
-                '\u{2503}', // Vertical
-            ),
+            Self::ThinRounded => TableChars {
+                upper_left: '\u{256D}',
+                upper_medium: '\u{252C}',
+                upper_right: '\u{256E}',
+                medium_left: '\u{251C}',
+                medium_medium: '\u{253C}',
+                medium_right: '\u{2524}',
+                lower_left: '\u{2570}',
+                lower_medium: '\u{2534}',
+                lower_right: '\u{256F}',
+                horizontal: '\u{2500}',
+                vertical: '\u{2502}',
+            },
 
-            Self::ThinDouble => (
-                '\u{2554}', // UpperL
-                '\u{2566}', // UpperM
-                '\u{2557}', // UpperR
-                '\u{2560}', // MediumL
-                '\u{256C}', // MediumM
-                '\u{2563}', // MediumR
-                '\u{255A}', // LowerL
-                '\u{2569}', // LowerM
-                '\u{255D}', // LowerR
-                '\u{2550}', // Horizontal
-                '\u{2551}', // Vertical
-            ),
+            Self::ThinDouble => TableChars {
+                upper_left: '\u{2554}',
+                upper_medium: '\u{2566}',
+                upper_right: '\u{2557}',
+                medium_left: '\u{2560}',
+                medium_medium: '\u{256C}',
+                medium_right: '\u{2563}',
+                lower_left: '\u{255A}',
+                lower_medium: '\u{2569}',
+                lower_right: '\u{255D}',
+                horizontal: '\u{2550}',
+                vertical: '\u{2551}',
+            },
 
-            Self::ThinRounded => (
-                '\u{256D}', // UpperL (Rounded)
-                '\u{252C}', // UpperM
-                '\u{256E}', // UpperR (Rounded)
-                '\u{251C}', // MediumL
-                '\u{253C}', // MediumM
-                '\u{2524}', // MediumR
-                '\u{2570}', // LowerL (Rounded)
-                '\u{2534}', // LowerM
-                '\u{256F}', // LowerR (Rounded)
-                '\u{2500}', // Horizontal
-                '\u{2502}', // Vertical
-            ),
-
-            Self::Basic => ('+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '|'),
+            Self::Thick => TableChars {
+                upper_left: '\u{250F}',
+                upper_medium: '\u{2533}',
+                upper_right: '\u{2513}',
+                medium_left: '\u{2523}',
+                medium_medium: '\u{254B}',
+                medium_right: '\u{252B}',
+                lower_left: '\u{2517}',
+                lower_medium: '\u{253B}',
+                lower_right: '\u{251B}',
+                horizontal: '\u{2501}',
+                vertical: '\u{2503}',
+            },
+            Self::Basic => TableChars {
+                upper_left: '+',
+                upper_medium: '+',
+                upper_right: '+',
+                medium_left: '+',
+                medium_medium: '+',
+                medium_right: '+',
+                lower_left: '+',
+                lower_medium: '+',
+                lower_right: '+',
+                horizontal: '-',
+                vertical: '|',
+            },
         }
     }
 }
