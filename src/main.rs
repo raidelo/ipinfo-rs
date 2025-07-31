@@ -1,5 +1,5 @@
 use core::fmt::Display;
-use core::net::Ipv4Addr;
+use core::net::IpAddr;
 use std::error::Error;
 use std::process::exit;
 
@@ -26,7 +26,7 @@ async fn run() -> Result<(), Box<dyn Error>> {
     let mut args = parse_args();
 
     let ip = args
-        .remove_one::<Ipv4Addr>("ip")
+        .remove_one::<IpAddr>("ip")
         .map_or(IpTarget::OwnAddress, IpTarget::Specific);
 
     let style: TableStyle = args

@@ -1,10 +1,10 @@
-use core::net::Ipv4Addr;
+use core::net::IpAddr;
 
 use clap::{Arg, ArgMatches, Command};
 
-fn ip_parser(arg: &str) -> Result<Ipv4Addr, String> {
+fn ip_parser(arg: &str) -> Result<IpAddr, String> {
     arg.parse()
-        .map_err(|_| format!("'{}' is not a valid IPv4 address", arg))
+        .map_err(|_| format!("'{}' is not a valid IPv4/IPv6 address", arg))
 }
 
 pub fn parse_args() -> ArgMatches {
@@ -19,7 +19,7 @@ pub fn parse_args() -> ArgMatches {
                 .required(false)
                 .value_name("ADDRESS")
                 .value_parser(ip_parser)
-                .help("Target IPv4 address [default: your public IP]"),
+                .help("Target IPv4/IPv6 address [default: your public IP]"),
         )
         .arg(
             Arg::new("style")

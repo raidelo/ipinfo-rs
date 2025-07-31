@@ -1,10 +1,10 @@
-use core::net::Ipv4Addr;
+use core::net::IpAddr;
 use core::time::Duration;
 
 use crate::{ENDPOINT, HOST, TIMEOUT};
 
 pub enum IpTarget {
-    Specific(Ipv4Addr),
+    Specific(IpAddr),
     OwnAddress,
 }
 
