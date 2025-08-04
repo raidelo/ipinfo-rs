@@ -45,12 +45,52 @@ async fn run() -> Result<(), Box<dyn Error>> {
 
     let response: reqwest::Response = get_info(&ip).await.map_err(map_reqwest_error)?;
 
-    let body: String = response.text().await?;
+    let body: String = response.text().await.map_err(|_| {
+        "Failed to process API response\n
+\x1b[1mTroubleshooting:\x1b[0m
+  1. Check your internet connection
+  2. Verify API status at https://ip-api.com/
+  3. Test connectivity with: curl http://ip-api.com/json
+  4. Try again in 1-2 minutes"
+            .to_string()
+    })?;
 
-    let info: serde_json::Value = serde_json::from_str(&body)?;
+    let empty_response_str = "Empty API response\n
+\x1b[1mPossible causes:\x1b[0m
+  • Invalid IP address format
+  • No fields specified in API request
+  • Temporary server issue
+  • API quota exceeded\n
+\x1b[1mTroubleshooting:\x1b[0m
+  1. Verify your IP address format
+  2. Check API status at https://ip-api.com/
+  3. Try again later";
+
+    if body.is_empty() {
+        return Err(empty_response_str.into());
+    };
+
+    let info: serde_json::Value = serde_json::from_str(&body).map_err(|err| {
+        let detail = match err.classify() {
+            serde_json::error::Category::Syntax => "Invalid JSON syntax",
+            serde_json::error::Category::Data => "Data type mismatch",
+            serde_json::error::Category::Eof => "Unexpected end of data",
+            serde_json::error::Category::Io => "Unknown parsing error",
+        };
+
+        format!(
+            "Invalid API response format\n
+\x1b[1mDetail:\x1b[0m {}\n
+\x1b[1mTroubleshooting:\x1b[0m
+  1. The API service may have changed its format
+  2. Check API status at https://ip-api.com/
+  3. Report this issue to the tool maintainer",
+            detail
+        )
+    })?;
 
     let object = info.as_object().ok_or_else(|| {
-        let response_type = match info {
+        let received = match info {
             serde_json::Value::Null => "null",
             serde_json::Value::Bool(_) => "bool",
             serde_json::Value::String(_) => "string",
@@ -62,17 +102,19 @@ async fn run() -> Result<(), Box<dyn Error>> {
         };
 
         format!(
-            "Invalid API response: expected object, got: {}",
-            response_type
+            "Invalid API response\n
+\x1b[1mExpected:\x1b[0m JSON Object
+\x1b[1mReceived:\x1b[0m {}\n
+\x1b[1mTroubleshooting:\x1b[0m
+  1. The API service may have changed its format
+  2. Check API status at https://ip-api.com/
+  3. Report this issue to the tool maintainer",
+            received
         )
     })?;
 
     if object.is_empty() {
-        return Err("API returned empty response. Possible causes:\n\
-              • Invalid IP address format
-              • No fields specified in API request
-              • Temporary server issue"
-            .into());
+        return Err(empty_response_str.into());
     };
 
     let table_formatted = get_table_formatted(object, style);
@@ -83,7 +125,7 @@ async fn run() -> Result<(), Box<dyn Error>> {
 }
 
 fn print_error<E: Display>(err: E) {
-    eprintln!("\x1b[1;31merror\x1b[0m: {}", err);
+    eprintln!("\x1b[1;31merror\x1b[39m:\x1b[0m {}", err);
 }
 
 fn map_reqwest_error(err: reqwest::Error) -> String {
