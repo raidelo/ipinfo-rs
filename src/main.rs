@@ -11,6 +11,11 @@ use cli::parse_args;
 mod consts;
 use consts::{ENDPOINT, HOST, TIMEOUT};
 
+mod error_messages;
+
+mod reqwest_error_mapping;
+use reqwest_error_mapping::map_reqwest_error;
+
 mod ip_info_utils;
 use ip_info_utils::{IpTarget, get_info};
 
@@ -126,43 +131,4 @@ async fn run() -> Result<(), Box<dyn Error>> {
 
 fn print_error<E: Display>(err: E) {
     eprintln!("\x1b[1;31merror\x1b[39m:\x1b[0m {}", err);
-}
-
-fn map_reqwest_error(err: reqwest::Error) -> String {
-    let err = err.without_url();
-
-    let general_hint = "Check your internet connection or firewall settings";
-
-    if err.is_timeout() {
-        format!(
-            "\u{231b} Timeout after {}ms: Check your connection",
-            TIMEOUT
-        )
-    } else if err.is_connect() {
-        format!(
-            "\u{01f50c} Connection failed: Server unreachable. {}",
-            general_hint
-        )
-    } else if err.is_decode() {
-        "\u{01f4e6} Data error: Failed to process server response".to_string()
-    } else if let Some(status) = err.status() {
-        match status {
-            s if s.is_client_error() && s.as_u16() == 429 => format!(
-                "\u{01f40c} API limit exceeded: You've reached ip-api.com's free tier limit (45 reqs/min)"
-            ),
-            s if s.is_client_error() => format!(
-                "\u{01f464} Client error ({}){}",
-                s,
-                if let Some(c_reason) = s.canonical_reason() {
-                    format!(": {}", c_reason)
-                } else {
-                    "".into()
-                }
-            ),
-            s if s.is_server_error() => format!("\u{01f310} Server error ({}): Try again later", s),
-            _ => "\u{26a0}\u{fe0f} HTTP error".into(),
-        }
-    } else {
-        "\u{274c} Network error: Unknown request failure".to_string()
-    }
 }
