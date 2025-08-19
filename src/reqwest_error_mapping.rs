@@ -14,7 +14,7 @@ pub fn map_reqwest_error(err: reqwest::Error) -> String {
 
     if err.is_timeout() {
         emoji = "\u{231b}";
-        title = format!("Timeout after {}ms", TIMEOUT);
+        title = format!("Connection timed out after {timeout}s", timeout = TIMEOUT);
         text = IS_TIMEOUT;
     } else if err.is_connect() {
         emoji = "\u{01f50c}";

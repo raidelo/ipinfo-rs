@@ -1,30 +1,33 @@
 pub const IS_TIMEOUT: &str = "
 Possible causes:
-  • Server took too long to respond
-  • Unstable or slow internet/network connection
+  • The server took too long to respond
+  • Slow or unstable internet connection
   • Firewall or proxy blocking outgoing requests
+  • Target server is under heavy load
 
 Troubleshooting:
-  1. Ensure your internet connection is stable
-  2. Check firewall or proxy settings that might block the request
+  1. Make sure your internet connection is stable
+  2. Check firewall or proxy settings that might block requests
   3. Wait 1-2 minutes and try again
   4. Verify API status at https://ip-api.com/
-  5. Report this issue to the tool maintainer if the problem persists
+  5. If the issue persists, report it to the tool maintainer
 ";
 
 pub const IS_CONNECT: &str = "
 Possible causes:
-  • The server might be down or unreachable
-  • DNS resolution failure (cannot translate domain name)
+  • The server is down or unreachable
+  • DNS resolution failure (domain name cannot be resolved)
   • No active internet connection
+  • Firewall, VPN, or proxy blocking the connection
 
 Troubleshooting:
-  1. Ensure you have an active internet connection
+  1. Make sure you have an active internet connection
   2. Open https://ip-api.com in your web browser to verify availability
   3. Use 'curl http://ip-api.com/json' to test connectivity from your terminal
   4. Restart your router or network adapter
-  5. Check your DNS settings and try a different DNS server if necessary
-  6. Report this issue to the tool maintainer if the problem persists
+  5. Check your DNS settings or try a different DNS server
+  6. If behind a firewall, VPN, or proxy, review their configurations
+  7. If the issue persists, report it to the tool maintainer
 ";
 
 pub const IS_REQUEST: &str = "
