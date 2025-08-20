@@ -35,38 +35,39 @@ Possible causes:
   • URL format is incorrect or contains invalid characters
   • HTTP method is not supported by the API
   • Request headers have invalid or missing values
+  • Request parameters are missing or incorrectly formatted
 
 Troubleshooting:
   1. Check that the URL is correctly formatted
   2. Confirm you are using a valid HTTP method (GET, POST, etc.)
   3. Review your request headers for correctness
-  4. Report this issue to the tool maintainer if the problem persists
+  4. Review request parameters for correctness
+  5. If the issue persists, report it to the tool maintainer
 ";
 
 pub const IS_BUILDER: &str = "
 Possible causes:
-  • Client is misconfigured or has conflicting options
-  • Settings conflict with each other causing build failure
-  • Missing required client configuration settings
+  • Conflicting or invalid client configuration options
+  • Missing required configuration parameters
 
 Troubleshooting:
-  1. Review your reqwest::Client configuration code
-  2. Remove or correct conflicting builder options
-  3. Ensure all required settings are provided
-  4. Report this issue to the tool maintainer if the problem persists
+  1. Double-check your reqwest::Client setup
+  2. Remove or fix any conflicting builder options
+  3. Make sure all required settings are provided
+  4. If the issue persists, report it to the tool maintainer
 ";
 
 pub const IS_BODY: &str = "
 Possible causes:
-  • Failed to convert data into request body format
-  • Provided body type is not supported by reqwest
-  • Missing or incorrect Content-Length header
+  • Could not serialize request body data (e.g., JSON serialization failed)
+  • Body type is not supported by reqwest
+  • Headers are incorrect or do not match the body format (e.g., Content-Type does not match)
 
 Troubleshooting:
-  1. Ensure the request body data is properly formatted (UTF-8 or bytes)
-  2. Verify that Content-Type header matches the body format
-  3. Check if Content-Length header is set correctly or omit it to let reqwest handle it
-  4. Report this issue to the tool maintainer if the problem persists
+  1. Make sure the request body is valid (e.g., JSON string, UTF-8 text, or bytes)
+  2. Verify that the Content-Type header matches the body format
+  3. Avoid setting Content-Length manually — let reqwest handle it
+  4. If the issue persists, report it to the tool maintainer
 ";
 
 pub const IS_REDIRECT: &str = "
