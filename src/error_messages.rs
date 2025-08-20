@@ -1,8 +1,8 @@
 pub const IS_TIMEOUT: &str = "
 Possible causes:
-  • The server took too long to respond
+  • Server took too long to respond
   • Slow or unstable internet connection
-  • Firewall or proxy blocking outgoing requests
+  • Firewall or proxy may be blocking outgoing requests
   • Target server is under heavy load
 
 Troubleshooting:
@@ -15,34 +15,27 @@ Troubleshooting:
 
 pub const IS_CONNECT: &str = "
 Possible causes:
-  • The server is down or unreachable
-  • DNS resolution failure (domain name cannot be resolved)
+  • Server is down or unreachable
+  • DNS resolution failed
   • No active internet connection
-  • Firewall, VPN, or proxy blocking the connection
+  • Firewall, VPN, or proxy may be blocking the connection
 
 Troubleshooting:
   1. Make sure you have an active internet connection
-  2. Open https://ip-api.com in your web browser to verify availability
-  3. Use 'curl http://ip-api.com/json' to test connectivity from your terminal
-  4. Restart your router or network adapter
-  5. Check your DNS settings or try a different DNS server
-  6. If behind a firewall, VPN, or proxy, review their configurations
-  7. If the issue persists, report it to the tool maintainer
+  2. Check if http://ip-api.com/json is reachable (browser or terminal)
+  3. Restart your router or network adapter
+  4. Verify DNS settings or try a different DNS server
+  5. Review firewall, VPN, or proxy configurations if applicable
+  6. If the issue persists, report it to the tool maintainer
 ";
 
 pub const IS_REQUEST: &str = "
 Possible causes:
-  • URL format is incorrect or contains invalid characters
-  • HTTP method is not supported by the API
-  • Request headers have invalid or missing values
-  • Request parameters are missing or incorrectly formatted
+  • URL or request parameters are invalid or incorrectly formatted
 
 Troubleshooting:
-  1. Check that the URL is correctly formatted
-  2. Confirm you are using a valid HTTP method (GET, POST, etc.)
-  3. Review your request headers for correctness
-  4. Review request parameters for correctness
-  5. If the issue persists, report it to the tool maintainer
+  1. Verify the URL format
+  2. If the issue persists, report it to the tool maintainer
 ";
 
 pub const IS_BUILDER: &str = "
@@ -72,73 +65,79 @@ Troubleshooting:
 
 pub const IS_REDIRECT: &str = "
 Possible causes:
-  • Server is redirecting requests in a loop
-  • Exceeded the maximum allowed redirects
+  • Server is causing a redirect loop
+  • Request exceeded the maximum number of allowed redirects
 
 Troubleshooting:
-  1. Set a reasonable limit for redirects in client settings
+  1. Adjust the maximum number of allowed redirects in your client
   2. Manually check redirect URLs to identify loops
-  3. Report this issue to the tool maintainer if the problem persists
+  3. If the issue persists, report it to the tool maintainer
 ";
 
 pub const IS_DECODE: &str = "
 Possible causes:
-  • API response format has changed or is unexpected
-  • Server returned data not matching expected structure
-  • Possible data corruption during transmission
+  • API response format changed or is not as expected
+  • Data might be corrupted during transmission
 
 Troubleshooting:
   1. Verify API status at https://ip-api.com/
   2. Update this tool to the latest version
-  3. Report this issue to the tool maintainer with details
+  3. If the issue persists, report it to the tool maintainer
 ";
 
 pub const API_RATE_LIMIT_EXEEDED: &str = "
 Possible causes:
-  • Rate limit of 45 requests per minute exceeded
-  • API key or IP address shared among multiple users
+  • API limit of 45 requests per minute exceeded
+  • IP address may be shared with other users
 
 Troubleshooting:
   1. Wait 1-2 minutes and try again
-  2. Consider using a different IP or API key
+  2. Consider using a different IP address if possible
   3. Verify API status at https://ip-api.com/
-  4. Report this issue to the tool maintainer if the problem persists
+  4. If the issue persists, report it to the tool maintainer
 ";
 
 pub const CLIENT_ERROR: &str = "
 Possible causes:
-  • Request parameters are invalid or missing
-  • Input format not supported by the API
+  • Invalid or missing request parameters, or unsupported input format
 
 Troubleshooting:
   1. Verify your input values
-  2. Consult the API documentation for allowed formats and constraints
-  3. Report the issue to the tool maintainer if it persists
+  2. Check the API documentation for allowed formats and constraints
+  3. If the issue persists, report it to the tool maintainer
 ";
 
 pub const SERVER_ERROR: &str = "
 Possible causes:
-  • API service is down or overloaded
-  • Scheduled maintenance in progress
-  • Temporary server issues
+  • API service is down, overloaded, or undergoing maintenance
 
 Troubleshooting:
   1. Wait 1-2 minutes and try again
-  2. Check API status at https://ip-api.com/
-  3. Contact the API provider if the problem persists
-  4. Report this issue to the tool maintainer if the problem persists
+  2. Verify API status at https://ip-api.com/
+  3. If the issue persists, report it to the tool maintainer
 ";
 
-pub const UNKNOWN_HTTP_ERROR: &str = "";
+pub const UNKNOWN_HTTP_ERROR: &str = "
+Possible causes:
+  • Unexpected or unknown HTTP response
+  • Network issues or connectivity problems
+  • Rare or unsupported status code
+
+Troubleshooting:
+  1. Check your internet connection
+  2. Run the command again
+  3. Update the tool to the latest version
+  4. If the issue persists, report it to the tool maintainer
+";
 
 pub const UNKNOWN_NETWORK_ERROR: &str = "
+error: 🌀 Unknown network error
+
 Possible causes:
-  • Possible misconfiguration of your network or system
-  • Unexpected or unknown network error occurred
+  • Unexpected or unknown network or system error
 
 Troubleshooting:
   1. Verify your network settings and connections
-  2. Ensure your internet is working properly
-  3. Contact support if the problem continues
-  4. Report this issue to the tool maintainer if the problem persists
+  2. Make sure your internet is working properly
+  3. If the issue persists, report it to the tool maintainer
 ";

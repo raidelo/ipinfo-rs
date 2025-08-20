@@ -14,7 +14,7 @@ pub fn map_reqwest_error(err: reqwest::Error) -> String {
 
     if err.is_timeout() {
         emoji = "\u{231b}";
-        title = format!("Connection timed out after {timeout}s", timeout = TIMEOUT);
+        title = format!("Connection timed out ({timeout}s)", timeout = TIMEOUT);
         text = IS_TIMEOUT;
     } else if err.is_connect() {
         emoji = "\u{01f50c}";
@@ -70,9 +70,15 @@ pub fn map_reqwest_error(err: reqwest::Error) -> String {
                 text = SERVER_ERROR;
             }
 
-            _ => {
+            s => {
                 emoji = "\u{26a0}\u{fe0f}";
-                title = format!("HTTP error",);
+                title = format!(
+                    "HTTP error ({}){}",
+                    s,
+                    s.canonical_reason()
+                        .map(|reason| format!(": {}", reason))
+                        .unwrap_or("".into())
+                );
                 text = UNKNOWN_HTTP_ERROR;
             }
         }
