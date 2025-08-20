@@ -19,6 +19,35 @@ use reqwest_error_mapping::map_reqwest_error;
 mod ip_info_utils;
 use ip_info_utils::{IpTarget, get_info};
 
+const BODY_READING_ERROR: &str = "\
+\u{01f4c4} Failed to read response body
+
+\x1b[1mPossible causes:\x1b[0m
+  • Response data is not valid UTF-8
+  • Server returned malformed or incomplete data
+  • Unexpected error while reading the response
+
+\x1b[1mTroubleshooting:\x1b[0m
+  1. Make sure your internet connection is working properly
+  2. Check if http://ip-api.com/json is reachable (browser or terminal)
+  3. Verify API status at https://ip-api.com/
+  4. Update the tool to the latest version
+  5. Report the issue to the tool maintainer if it persists
+";
+
+const EMPTY_RESPONSE_FROM_SERVER: &str = "\
+\u{01f4ed} Empty API response
+
+\x1b[1mPossible causes:\x1b[0m
+  • API service is down, overloaded, or undergoing maintenance
+  • Unexpected server error resulted in no response body
+
+\x1b[1mTroubleshooting:\x1b[0m
+  1. Check API status at https://ip-api.com/
+  2. Wait a few minutes and try again
+  3. Report the issue to the tool maintainer if it persists
+";
+
 #[tokio::main]
 async fn main() {
     if let Err(err) = run().await {
@@ -50,29 +79,13 @@ async fn run() -> Result<(), Box<dyn Error>> {
 
     let response: reqwest::Response = get_info(&ip).await.map_err(map_reqwest_error)?;
 
-    let body: String = response.text().await.map_err(|_| {
-        "Failed to process API response\n
-\x1b[1mTroubleshooting:\x1b[0m
-  1. Check your internet connection
-  2. Verify API status at https://ip-api.com/
-  3. Test connectivity with: curl http://ip-api.com/json
-  4. Try again in 1-2 minutes"
-            .to_string()
-    })?;
-
-    let empty_response_str = "Empty API response\n
-\x1b[1mPossible causes:\x1b[0m
-  • Invalid IP address format
-  • No fields specified in API request
-  • Temporary server issue
-  • API quota exceeded\n
-\x1b[1mTroubleshooting:\x1b[0m
-  1. Verify your IP address format
-  2. Check API status at https://ip-api.com/
-  3. Try again later";
+    let body: String = response
+        .text()
+        .await
+        .map_err(|_| BODY_READING_ERROR.to_string())?;
 
     if body.is_empty() {
-        return Err(empty_response_str.into());
+        return Err(EMPTY_RESPONSE_FROM_SERVER.into());
     };
 
     let info: serde_json::Value = serde_json::from_str(&body).map_err(|err| {
@@ -119,7 +132,7 @@ async fn run() -> Result<(), Box<dyn Error>> {
     })?;
 
     if object.is_empty() {
-        return Err(empty_response_str.into());
+        return Err(EMPTY_RESPONSE_FROM_SERVER.into());
     };
 
     let table_formatted = get_table_formatted(object, style);

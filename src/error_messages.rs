@@ -8,9 +8,9 @@ pub const IS_TIMEOUT: &str = "\
 \x1b[1mTroubleshooting:\x1b[0m
   1. Make sure your internet connection is stable
   2. Check firewall or proxy settings that might block requests
-  3. Wait 1-2 minutes and try again
+  3. Wait a few minutes and try again
   4. Verify API status at https://ip-api.com/
-  5. If the issue persists, report it to the tool maintainer
+  5. Report the issue to the tool maintainer if it persists
 ";
 
 pub const IS_CONNECT: &str = "\
@@ -26,7 +26,7 @@ pub const IS_CONNECT: &str = "\
   3. Restart your router or network adapter
   4. Verify DNS settings or try a different DNS server
   5. Review firewall, VPN, or proxy configurations if applicable
-  6. If the issue persists, report it to the tool maintainer
+  6. Report the issue to the tool maintainer if it persists
 ";
 
 pub const IS_REQUEST: &str = "\
@@ -35,7 +35,7 @@ pub const IS_REQUEST: &str = "\
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Verify the URL format
-  2. If the issue persists, report it to the tool maintainer
+  2. Report the issue to the tool maintainer if it persists
 ";
 
 pub const IS_BUILDER: &str = "\
@@ -47,7 +47,7 @@ pub const IS_BUILDER: &str = "\
   1. Double-check your reqwest::Client setup
   2. Remove or fix any conflicting builder options
   3. Make sure all required settings are provided
-  4. If the issue persists, report it to the tool maintainer
+  4. Report the issue to the tool maintainer if it persists
 ";
 
 pub const IS_BODY: &str = "\
@@ -60,7 +60,7 @@ pub const IS_BODY: &str = "\
   1. Make sure the request body is valid (e.g., JSON string, UTF-8 text, or bytes)
   2. Verify that the Content-Type header matches the body format
   3. Avoid setting Content-Length manually — let reqwest handle it
-  4. If the issue persists, report it to the tool maintainer
+  4. Report the issue to the tool maintainer if it persists
 ";
 
 pub const IS_REDIRECT: &str = "\
@@ -71,7 +71,7 @@ pub const IS_REDIRECT: &str = "\
 \x1b[1mTroubleshooting:\x1b[0m
   1. Adjust the maximum number of allowed redirects in your client
   2. Manually check redirect URLs to identify loops
-  3. If the issue persists, report it to the tool maintainer
+  3. Report the issue to the tool maintainer if it persists
 ";
 
 pub const IS_DECODE: &str = "\
@@ -82,7 +82,7 @@ pub const IS_DECODE: &str = "\
 \x1b[1mTroubleshooting:\x1b[0m
   1. Verify API status at https://ip-api.com/
   2. Update this tool to the latest version
-  3. If the issue persists, report it to the tool maintainer
+  3. Report the issue to the tool maintainer if it persists
 ";
 
 pub const API_RATE_LIMIT_EXEEDED: &str = "\
@@ -91,10 +91,10 @@ pub const API_RATE_LIMIT_EXEEDED: &str = "\
   • IP address may be shared with other users
 
 \x1b[1mTroubleshooting:\x1b[0m
-  1. Wait 1-2 minutes and try again
+  1. Wait a few minutes and try again
   2. Consider using a different IP address if possible
   3. Verify API status at https://ip-api.com/
-  4. If the issue persists, report it to the tool maintainer
+  4. Report the issue to the tool maintainer if it persists
 ";
 
 pub const CLIENT_ERROR: &str = "\
@@ -104,7 +104,7 @@ pub const CLIENT_ERROR: &str = "\
 \x1b[1mTroubleshooting:\x1b[0m
   1. Verify your input values
   2. Check the API documentation for allowed formats and constraints
-  3. If the issue persists, report it to the tool maintainer
+  3. Report the issue to the tool maintainer if it persists
 ";
 
 pub const SERVER_ERROR: &str = "\
@@ -112,9 +112,9 @@ pub const SERVER_ERROR: &str = "\
   • API service is down, overloaded, or undergoing maintenance
 
 \x1b[1mTroubleshooting:\x1b[0m
-  1. Wait 1-2 minutes and try again
+  1. Wait a few minutes and try again
   2. Verify API status at https://ip-api.com/
-  3. If the issue persists, report it to the tool maintainer
+  3. Report the issue to the tool maintainer if it persists
 ";
 
 pub const UNKNOWN_HTTP_ERROR: &str = "\
@@ -124,10 +124,10 @@ pub const UNKNOWN_HTTP_ERROR: &str = "\
   • Rare or unsupported status code
 
 \x1b[1mTroubleshooting:\x1b[0m
-  1. Check your internet connection
+  1. Make sure your internet connection is working properly
   2. Run the command again
   3. Update the tool to the latest version
-  4. If the issue persists, report it to the tool maintainer
+  4. Report the issue to the tool maintainer if it persists
 ";
 
 pub const UNKNOWN_NETWORK_ERROR: &str = "\
@@ -137,5 +137,5 @@ pub const UNKNOWN_NETWORK_ERROR: &str = "\
 \x1b[1mTroubleshooting:\x1b[0m
   1. Verify your network settings and connections
   2. Make sure your internet is working properly
-  3. If the issue persists, report it to the tool maintainer
+  3. Report the issue to the tool maintainer if it persists
 ";
