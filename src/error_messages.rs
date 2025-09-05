@@ -1,5 +1,5 @@
 pub const IS_TIMEOUT: &str = "\
-\u{231b} Connection timed out (%(timeout)s)
+\u{231b} Connection timed out (%(timeout)ss)
 
 \x1b[1mPossible causes:\x1b[0m
   \u{2022} Server took too long to respond
@@ -12,8 +12,7 @@ pub const IS_TIMEOUT: &str = "\
   2. Check firewall or proxy settings that might block requests
   3. Wait a few minutes and try again
   4. Verify API status at https://ip-api.com/
-  5. Report the issue to the tool maintainer if it persists
-";
+  5. Report the issue to the tool maintainer if it persists";
 
 pub const IS_CONNECT: &str = "\
 \u{01f50c} Connection failed
@@ -30,8 +29,7 @@ pub const IS_CONNECT: &str = "\
   3. Restart your router or network adapter
   4. Verify DNS settings or try a different DNS server
   5. Review firewall, VPN, or proxy configurations if applicable
-  6. Report the issue to the tool maintainer if it persists
-";
+  6. Report the issue to the tool maintainer if it persists";
 
 pub const IS_REQUEST: &str = "\
 \u{01f4dc} Invalid request
@@ -41,8 +39,7 @@ pub const IS_REQUEST: &str = "\
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Verify the URL format
-  2. Report the issue to the tool maintainer if it persists
-";
+  2. Report the issue to the tool maintainer if it persists";
 
 pub const IS_BUILDER: &str = "\
 \u{01f6e0} Request builder error
@@ -55,8 +52,7 @@ pub const IS_BUILDER: &str = "\
   1. Double-check your reqwest::Client setup
   2. Remove or fix any conflicting builder options
   3. Make sure all required settings are provided
-  4. Report the issue to the tool maintainer if it persists
-";
+  4. Report the issue to the tool maintainer if it persists";
 
 pub const IS_BODY: &str = "\
 \u{01f4e6} Invalid response body
@@ -70,8 +66,7 @@ pub const IS_BODY: &str = "\
   1. Make sure the request body is valid (e.g., JSON string, UTF-8 text, or bytes)
   2. Verify that the Content-Type header matches the body format
   3. Avoid setting Content-Length manually — let reqwest handle it
-  4. Report the issue to the tool maintainer if it persists
-";
+  4. Report the issue to the tool maintainer if it persists";
 
 pub const IS_REDIRECT: &str = "\
 \u{01f504} Too many redirects
@@ -83,8 +78,7 @@ pub const IS_REDIRECT: &str = "\
 \x1b[1mTroubleshooting:\x1b[0m
   1. Adjust the maximum number of allowed redirects in your client
   2. Manually check redirect URLs to identify loops
-  3. Report the issue to the tool maintainer if it persists
-";
+  3. Report the issue to the tool maintainer if it persists";
 
 pub const IS_DECODE: &str = "\
 \u{01f4c4} Response decoding error
@@ -96,8 +90,7 @@ pub const IS_DECODE: &str = "\
 \x1b[1mTroubleshooting:\x1b[0m
   1. Verify API status at https://ip-api.com/
   2. Update this tool to the latest version
-  3. Report the issue to the tool maintainer if it persists
-";
+  3. Report the issue to the tool maintainer if it persists";
 
 pub const API_RATE_LIMIT_EXEEDED: &str = "\
 \u{01f40c} API rate limit exceeded
@@ -110,8 +103,7 @@ pub const API_RATE_LIMIT_EXEEDED: &str = "\
   1. Wait a few minutes and try again
   2. Consider using a different IP address if possible
   3. Verify API status at https://ip-api.com/
-  4. Report the issue to the tool maintainer if it persists
-";
+  4. Report the issue to the tool maintainer if it persists";
 
 pub const CLIENT_ERROR: &str = "\
 \u{01f464} Client error (%(status_code)d)%(reason)s
@@ -122,8 +114,7 @@ pub const CLIENT_ERROR: &str = "\
 \x1b[1mTroubleshooting:\x1b[0m
   1. Verify your input values
   2. Check the API documentation for allowed formats and constraints
-  3. Report the issue to the tool maintainer if it persists
-";
+  3. Report the issue to the tool maintainer if it persists";
 
 pub const SERVER_ERROR: &str = "\
 \u{01f310} Server error (%(status_code)d)%(reason)s
@@ -134,8 +125,7 @@ pub const SERVER_ERROR: &str = "\
 \x1b[1mTroubleshooting:\x1b[0m
   1. Wait a few minutes and try again
   2. Verify API status at https://ip-api.com/
-  3. Report the issue to the tool maintainer if it persists
-";
+  3. Report the issue to the tool maintainer if it persists";
 
 pub const UNKNOWN_HTTP_ERROR: &str = "\
 \u{26a0}\u{fe0f} HTTP error (%(status_code)d)%(reason)s
@@ -149,8 +139,7 @@ pub const UNKNOWN_HTTP_ERROR: &str = "\
   1. Make sure your internet connection is working properly
   2. Run the command again
   3. Update the tool to the latest version
-  4. Report the issue to the tool maintainer if it persists
-";
+  4. Report the issue to the tool maintainer if it persists";
 
 pub const UNKNOWN_NETWORK_ERROR: &str = "\
 \u{01f300} Unknown network error
@@ -161,8 +150,7 @@ pub const UNKNOWN_NETWORK_ERROR: &str = "\
 \x1b[1mTroubleshooting:\x1b[0m
   1. Verify your network settings and connections
   2. Make sure your internet is working properly
-  3. Report the issue to the tool maintainer if it persists
-";
+  3. Report the issue to the tool maintainer if it persists";
 
 pub const BODY_READING_ERROR: &str = "\
 \u{01f4c4} Failed to read response body
@@ -177,8 +165,7 @@ pub const BODY_READING_ERROR: &str = "\
   2. Check if http://ip-api.com/json is reachable (browser or terminal)
   3. Verify API status at https://ip-api.com/
   4. Update the tool to the latest version
-  5. Report the issue to the tool maintainer if it persists
-";
+  5. Report the issue to the tool maintainer if it persists";
 
 pub const EMPTY_RESPONSE_FROM_SERVER: &str = "\
 \u{01f4ed} Empty API response
@@ -190,5 +177,4 @@ pub const EMPTY_RESPONSE_FROM_SERVER: &str = "\
 \x1b[1mTroubleshooting:\x1b[0m
   1. Check API status at https://ip-api.com/
   2. Wait a few minutes and try again
-  3. Report the issue to the tool maintainer if it persists
-";
+  3. Report the issue to the tool maintainer if it persists";
