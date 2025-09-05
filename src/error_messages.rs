@@ -1,4 +1,6 @@
 pub const IS_TIMEOUT: &str = "\
+\u{231b} Connection timed out (%(timeout)s)
+
 \x1b[1mPossible causes:\x1b[0m
   \u{2022} Server took too long to respond
   \u{2022} Slow or unstable internet connection
@@ -14,6 +16,8 @@ pub const IS_TIMEOUT: &str = "\
 ";
 
 pub const IS_CONNECT: &str = "\
+\u{01f50c} Connection failed
+
 \x1b[1mPossible causes:\x1b[0m
   \u{2022} Server is down or unreachable
   \u{2022} DNS resolution failed
@@ -30,6 +34,8 @@ pub const IS_CONNECT: &str = "\
 ";
 
 pub const IS_REQUEST: &str = "\
+\u{01f4dc} Invalid request
+
 \x1b[1mPossible causes:\x1b[0m
   \u{2022} URL or request parameters are invalid or incorrectly formatted
 
@@ -39,6 +45,8 @@ pub const IS_REQUEST: &str = "\
 ";
 
 pub const IS_BUILDER: &str = "\
+\u{01f6e0} Request builder error
+
 \x1b[1mPossible causes:\x1b[0m
   \u{2022} Conflicting or invalid client configuration options
   \u{2022} Missing required configuration parameters
@@ -51,6 +59,8 @@ pub const IS_BUILDER: &str = "\
 ";
 
 pub const IS_BODY: &str = "\
+\u{01f4e6} Invalid response body
+
 \x1b[1mPossible causes:\x1b[0m
   \u{2022} Could not serialize request body data (e.g., JSON serialization failed)
   \u{2022} Body type is not supported by reqwest
@@ -64,6 +74,8 @@ pub const IS_BODY: &str = "\
 ";
 
 pub const IS_REDIRECT: &str = "\
+\u{01f504} Too many redirects
+
 \x1b[1mPossible causes:\x1b[0m
   \u{2022} Server is causing a redirect loop
   \u{2022} Request exceeded the maximum number of allowed redirects
@@ -75,6 +87,8 @@ pub const IS_REDIRECT: &str = "\
 ";
 
 pub const IS_DECODE: &str = "\
+\u{01f4c4} Response decoding error
+
 \x1b[1mPossible causes:\x1b[0m
   \u{2022} API response format changed or is not as expected
   \u{2022} Data might be corrupted during transmission
@@ -86,6 +100,8 @@ pub const IS_DECODE: &str = "\
 ";
 
 pub const API_RATE_LIMIT_EXEEDED: &str = "\
+\u{01f40c} API rate limit exceeded
+
 \x1b[1mPossible causes:\x1b[0m
   \u{2022} API limit of 45 requests per minute exceeded
   \u{2022} IP address may be shared with other users
@@ -98,6 +114,8 @@ pub const API_RATE_LIMIT_EXEEDED: &str = "\
 ";
 
 pub const CLIENT_ERROR: &str = "\
+\u{01f464} Client error (%(status_code)d)%(reason)s
+
 \x1b[1mPossible causes:\x1b[0m
   \u{2022} Invalid or missing request parameters, or unsupported input format
 
@@ -108,6 +126,8 @@ pub const CLIENT_ERROR: &str = "\
 ";
 
 pub const SERVER_ERROR: &str = "\
+\u{01f310} Server error (%(status_code)d)%(reason)s
+
 \x1b[1mPossible causes:\x1b[0m
   \u{2022} API service is down, overloaded, or undergoing maintenance
 
@@ -118,6 +138,8 @@ pub const SERVER_ERROR: &str = "\
 ";
 
 pub const UNKNOWN_HTTP_ERROR: &str = "\
+\u{26a0}\u{fe0f} HTTP error (%(status_code)d)%(reason)s
+
 \x1b[1mPossible causes:\x1b[0m
   \u{2022} Unexpected or unknown HTTP response
   \u{2022} Network issues or connectivity problems
@@ -131,11 +153,42 @@ pub const UNKNOWN_HTTP_ERROR: &str = "\
 ";
 
 pub const UNKNOWN_NETWORK_ERROR: &str = "\
+\u{01f300} Unknown network error
+
 \x1b[1mPossible causes:\x1b[0m
   \u{2022} Unexpected or unknown network or system error
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Verify your network settings and connections
   2. Make sure your internet is working properly
+  3. Report the issue to the tool maintainer if it persists
+";
+
+pub const BODY_READING_ERROR: &str = "\
+\u{01f4c4} Failed to read response body
+
+\x1b[1mPossible causes:\x1b[0m
+  \u{2022} Response data is not valid UTF-8
+  \u{2022} Server returned malformed or incomplete data
+  \u{2022} Unexpected error while reading the response
+
+\x1b[1mTroubleshooting:\x1b[0m
+  1. Make sure your internet connection is working properly
+  2. Check if http://ip-api.com/json is reachable (browser or terminal)
+  3. Verify API status at https://ip-api.com/
+  4. Update the tool to the latest version
+  5. Report the issue to the tool maintainer if it persists
+";
+
+pub const EMPTY_RESPONSE_FROM_SERVER: &str = "\
+\u{01f4ed} Empty API response
+
+\x1b[1mPossible causes:\x1b[0m
+  \u{2022} API service is down, overloaded, or undergoing maintenance
+  \u{2022} Unexpected server error resulted in no response body
+
+\x1b[1mTroubleshooting:\x1b[0m
+  1. Check API status at https://ip-api.com/
+  2. Wait a few minutes and try again
   3. Report the issue to the tool maintainer if it persists
 ";

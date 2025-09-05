@@ -12,41 +12,13 @@ mod consts;
 use consts::{ENDPOINT, HOST, TIMEOUT};
 
 mod error_messages;
+use error_messages::{BODY_READING_ERROR, EMPTY_RESPONSE_FROM_SERVER};
 
 mod reqwest_error_mapping;
 use reqwest_error_mapping::map_reqwest_error;
 
 mod ip_info_utils;
 use ip_info_utils::{IpTarget, get_info};
-
-const BODY_READING_ERROR: &str = "\
-\u{01f4c4} Failed to read response body
-
-\x1b[1mPossible causes:\x1b[0m
-  \u{2022} Response data is not valid UTF-8
-  \u{2022} Server returned malformed or incomplete data
-  \u{2022} Unexpected error while reading the response
-
-\x1b[1mTroubleshooting:\x1b[0m
-  1. Make sure your internet connection is working properly
-  2. Check if http://ip-api.com/json is reachable (browser or terminal)
-  3. Verify API status at https://ip-api.com/
-  4. Update the tool to the latest version
-  5. Report the issue to the tool maintainer if it persists
-";
-
-const EMPTY_RESPONSE_FROM_SERVER: &str = "\
-\u{01f4ed} Empty API response
-
-\x1b[1mPossible causes:\x1b[0m
-  \u{2022} API service is down, overloaded, or undergoing maintenance
-  \u{2022} Unexpected server error resulted in no response body
-
-\x1b[1mTroubleshooting:\x1b[0m
-  1. Check API status at https://ip-api.com/
-  2. Wait a few minutes and try again
-  3. Report the issue to the tool maintainer if it persists
-";
 
 #[tokio::main]
 async fn main() {

@@ -8,90 +8,64 @@ use crate::error_messages::{
 pub fn map_reqwest_error(err: reqwest::Error) -> String {
     let err = err.without_url();
 
-    let emoji: &str;
-    let title: String;
-    let text: &str;
+    let error_msg: String;
 
     if err.is_timeout() {
-        emoji = "\u{231b}";
-        title = format!(
-            "Connection timed out ({timeout}s)",
-            timeout = TIMEOUT / 1000
-        );
-        text = IS_TIMEOUT;
+        error_msg = IS_TIMEOUT.replace("%(timeout)s", &(TIMEOUT / 1000).to_string());
     } else if err.is_connect() {
-        emoji = "\u{01f50c}";
-        title = format!("Connection failed");
-        text = IS_CONNECT;
+        error_msg = IS_CONNECT.into();
     } else if err.is_request() {
-        emoji = "\u{01f4dc}";
-        title = format!("Invalid request");
-        text = IS_REQUEST;
+        error_msg = IS_REQUEST.into();
     } else if err.is_builder() {
-        emoji = "\u{01f6e0}";
-        title = format!("Request builder error");
-        text = IS_BUILDER;
+        error_msg = IS_BUILDER.into();
     } else if err.is_body() {
-        emoji = "\u{01f4e6}";
-        title = format!("Invalid response body");
-        text = IS_BODY;
+        error_msg = IS_BODY.into();
     } else if err.is_redirect() {
-        emoji = "\u{01f504}";
-        title = format!("Too many redirects");
-        text = IS_REDIRECT;
+        error_msg = IS_REDIRECT.into();
     } else if err.is_decode() {
-        emoji = "\u{01f4c4}";
-        title = format!("Response decoding error");
-        text = IS_DECODE;
+        error_msg = IS_DECODE.into();
     } else if let Some(status) = err.status() {
         match status {
             s if s.is_client_error() && s.as_u16() == 429 => {
-                emoji = "\u{01f40c}";
-                title = format!("API rate limit exceeded");
-                text = API_RATE_LIMIT_EXEEDED;
+                error_msg = API_RATE_LIMIT_EXEEDED.into();
             }
             s if s.is_client_error() => {
-                emoji = "\u{01f464}";
-                title = format!(
-                    "Client error ({}){}",
-                    s,
-                    s.canonical_reason()
-                        .map(|reason| format!(": {}", reason))
-                        .unwrap_or("".into())
-                );
-                text = CLIENT_ERROR;
+                let reason = s
+                    .canonical_reason()
+                    .map(|reason| format!(": {}", reason))
+                    .unwrap_or("".into());
+
+                error_msg = CLIENT_ERROR
+                    .replace("%(status_code)d", s.as_str())
+                    .replace("%(reason)s", &reason);
             }
             s if s.is_server_error() => {
-                emoji = "\u{01f310}";
-                title = format!(
-                    "Server error ({}){}",
-                    s,
-                    s.canonical_reason()
-                        .map(|reason| format!(": {}", reason))
-                        .unwrap_or("".into())
-                );
-                text = SERVER_ERROR;
+                let reason = s
+                    .canonical_reason()
+                    .map(|reason| format!(": {}", reason))
+                    .unwrap_or("".into());
+
+                error_msg = SERVER_ERROR
+                    .replace("%(status_code)d", s.as_str())
+                    .replace("%(reason)s", &reason);
             }
 
             s => {
-                emoji = "\u{26a0}\u{fe0f}";
-                title = format!(
-                    "HTTP error ({}){}",
-                    s,
-                    s.canonical_reason()
-                        .map(|reason| format!(": {}", reason))
-                        .unwrap_or("".into())
-                );
-                text = UNKNOWN_HTTP_ERROR;
+                let reason = s
+                    .canonical_reason()
+                    .map(|reason| format!(": {}", reason))
+                    .unwrap_or("".into());
+
+                error_msg = UNKNOWN_HTTP_ERROR
+                    .replace("%(status_code)d", s.as_str())
+                    .replace("%(reason)s", &reason);
             }
         }
     } else {
         {
-            emoji = "\u{01f300}";
-            title = format!("Unknown network error");
-            text = UNKNOWN_NETWORK_ERROR;
+            error_msg = UNKNOWN_NETWORK_ERROR.into();
         }
     };
 
-    return format!("{emoji} {title}\n\n{text}");
+    return error_msg;
 }
