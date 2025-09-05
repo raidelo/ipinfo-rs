@@ -97,12 +97,17 @@ async fn run() -> Result<(), Box<dyn Error>> {
         };
 
         format!(
-            "Invalid API response format\n
-\x1b[1mDetail:\x1b[0m {}\n
+            "\
+\u{01f4c4} Failed to parse API response
+
+\x1b[1mDetail:\x1b[0m {}
+ 
 \x1b[1mTroubleshooting:\x1b[0m
-  1. The API service may have changed its format
+  1. The API service may have changed its response format
   2. Check API status at https://ip-api.com/
-  3. Report this issue to the tool maintainer",
+  3. Update the tool to the latest version
+  4. Report the issue to the tool maintainer if it persists
+",
             detail
         )
     })?;
@@ -120,13 +125,17 @@ async fn run() -> Result<(), Box<dyn Error>> {
         };
 
         format!(
-            "Invalid API response\n
-\x1b[1mExpected:\x1b[0m JSON Object
-\x1b[1mReceived:\x1b[0m {}\n
+            "\u{01f9e9} Invalid API response type
+
+\x1b[1mExpected:\x1b[0m JSON object
+\x1b[1mReceived:\x1b[0m {}
+
 \x1b[1mTroubleshooting:\x1b[0m
-  1. The API service may have changed its format
+  1. The API service may have changed its response format
   2. Check API status at https://ip-api.com/
-  3. Report this issue to the tool maintainer",
+  3. Update the tool to the latest version
+  4. Report the issue to the tool maintainer if it persists
+",
             received
         )
     })?;
