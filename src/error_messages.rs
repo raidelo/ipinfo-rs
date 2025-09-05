@@ -1,9 +1,9 @@
 pub const IS_TIMEOUT: &str = "\
 \x1b[1mPossible causes:\x1b[0m
-  • Server took too long to respond
-  • Slow or unstable internet connection
-  • Firewall or proxy may be blocking outgoing requests
-  • Target server is under heavy load
+  \u{2022} Server took too long to respond
+  \u{2022} Slow or unstable internet connection
+  \u{2022} Firewall or proxy may be blocking outgoing requests
+  \u{2022} Target server is under heavy load
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Make sure your internet connection is stable
@@ -15,10 +15,10 @@ pub const IS_TIMEOUT: &str = "\
 
 pub const IS_CONNECT: &str = "\
 \x1b[1mPossible causes:\x1b[0m
-  • Server is down or unreachable
-  • DNS resolution failed
-  • No active internet connection
-  • Firewall, VPN, or proxy may be blocking the connection
+  \u{2022} Server is down or unreachable
+  \u{2022} DNS resolution failed
+  \u{2022} No active internet connection
+  \u{2022} Firewall, VPN, or proxy may be blocking the connection
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Make sure you have an active internet connection
@@ -31,7 +31,7 @@ pub const IS_CONNECT: &str = "\
 
 pub const IS_REQUEST: &str = "\
 \x1b[1mPossible causes:\x1b[0m
-  • URL or request parameters are invalid or incorrectly formatted
+  \u{2022} URL or request parameters are invalid or incorrectly formatted
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Verify the URL format
@@ -40,8 +40,8 @@ pub const IS_REQUEST: &str = "\
 
 pub const IS_BUILDER: &str = "\
 \x1b[1mPossible causes:\x1b[0m
-  • Conflicting or invalid client configuration options
-  • Missing required configuration parameters
+  \u{2022} Conflicting or invalid client configuration options
+  \u{2022} Missing required configuration parameters
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Double-check your reqwest::Client setup
@@ -52,9 +52,9 @@ pub const IS_BUILDER: &str = "\
 
 pub const IS_BODY: &str = "\
 \x1b[1mPossible causes:\x1b[0m
-  • Could not serialize request body data (e.g., JSON serialization failed)
-  • Body type is not supported by reqwest
-  • Headers are incorrect or do not match the body format (e.g., Content-Type does not match)
+  \u{2022} Could not serialize request body data (e.g., JSON serialization failed)
+  \u{2022} Body type is not supported by reqwest
+  \u{2022} Headers are incorrect or do not match the body format (e.g., Content-Type does not match)
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Make sure the request body is valid (e.g., JSON string, UTF-8 text, or bytes)
@@ -65,8 +65,8 @@ pub const IS_BODY: &str = "\
 
 pub const IS_REDIRECT: &str = "\
 \x1b[1mPossible causes:\x1b[0m
-  • Server is causing a redirect loop
-  • Request exceeded the maximum number of allowed redirects
+  \u{2022} Server is causing a redirect loop
+  \u{2022} Request exceeded the maximum number of allowed redirects
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Adjust the maximum number of allowed redirects in your client
@@ -76,8 +76,8 @@ pub const IS_REDIRECT: &str = "\
 
 pub const IS_DECODE: &str = "\
 \x1b[1mPossible causes:\x1b[0m
-  • API response format changed or is not as expected
-  • Data might be corrupted during transmission
+  \u{2022} API response format changed or is not as expected
+  \u{2022} Data might be corrupted during transmission
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Verify API status at https://ip-api.com/
@@ -87,8 +87,8 @@ pub const IS_DECODE: &str = "\
 
 pub const API_RATE_LIMIT_EXEEDED: &str = "\
 \x1b[1mPossible causes:\x1b[0m
-  • API limit of 45 requests per minute exceeded
-  • IP address may be shared with other users
+  \u{2022} API limit of 45 requests per minute exceeded
+  \u{2022} IP address may be shared with other users
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Wait a few minutes and try again
@@ -99,7 +99,7 @@ pub const API_RATE_LIMIT_EXEEDED: &str = "\
 
 pub const CLIENT_ERROR: &str = "\
 \x1b[1mPossible causes:\x1b[0m
-  • Invalid or missing request parameters, or unsupported input format
+  \u{2022} Invalid or missing request parameters, or unsupported input format
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Verify your input values
@@ -109,7 +109,7 @@ pub const CLIENT_ERROR: &str = "\
 
 pub const SERVER_ERROR: &str = "\
 \x1b[1mPossible causes:\x1b[0m
-  • API service is down, overloaded, or undergoing maintenance
+  \u{2022} API service is down, overloaded, or undergoing maintenance
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Wait a few minutes and try again
@@ -119,9 +119,9 @@ pub const SERVER_ERROR: &str = "\
 
 pub const UNKNOWN_HTTP_ERROR: &str = "\
 \x1b[1mPossible causes:\x1b[0m
-  • Unexpected or unknown HTTP response
-  • Network issues or connectivity problems
-  • Rare or unsupported status code
+  \u{2022} Unexpected or unknown HTTP response
+  \u{2022} Network issues or connectivity problems
+  \u{2022} Rare or unsupported status code
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Make sure your internet connection is working properly
@@ -132,7 +132,7 @@ pub const UNKNOWN_HTTP_ERROR: &str = "\
 
 pub const UNKNOWN_NETWORK_ERROR: &str = "\
 \x1b[1mPossible causes:\x1b[0m
-  • Unexpected or unknown network or system error
+  \u{2022} Unexpected or unknown network or system error
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Verify your network settings and connections

@@ -23,9 +23,9 @@ const BODY_READING_ERROR: &str = "\
 \u{01f4c4} Failed to read response body
 
 \x1b[1mPossible causes:\x1b[0m
-  • Response data is not valid UTF-8
-  • Server returned malformed or incomplete data
-  • Unexpected error while reading the response
+  \u{2022} Response data is not valid UTF-8
+  \u{2022} Server returned malformed or incomplete data
+  \u{2022} Unexpected error while reading the response
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Make sure your internet connection is working properly
@@ -39,8 +39,8 @@ const EMPTY_RESPONSE_FROM_SERVER: &str = "\
 \u{01f4ed} Empty API response
 
 \x1b[1mPossible causes:\x1b[0m
-  • API service is down, overloaded, or undergoing maintenance
-  • Unexpected server error resulted in no response body
+  \u{2022} API service is down, overloaded, or undergoing maintenance
+  \u{2022} Unexpected server error resulted in no response body
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Check API status at https://ip-api.com/
