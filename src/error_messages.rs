@@ -35,26 +35,26 @@ pub const IS_REQUEST: &str = "\
 \u{01f4dc} Invalid request
 
 \x1b[1mPossible causes:\x1b[0m
-  \u{2022} URL or request parameters are invalid or incorrectly formatted
+  \u{2022} Failed to build or send the HTTP request
+  \u{2022} Unexpected internal error in the HTTP client
 
 \x1b[1mTroubleshooting:\x1b[0m
-  1. Verify the URL format
-  2. Update the tool to the latest version
-  3. Report the issue to the tool maintainer if it persists";
+  1. Wait a few minutes and try again
+  2. Check API status at https://ip-api.com/
+  3. Update the tool to the latest version
+  4. Report the issue to the tool maintainer if it persists";
 
 pub const IS_BUILDER: &str = "\
 \u{01f6e0} Request builder error
 
 \x1b[1mPossible causes:\x1b[0m
   \u{2022} Conflicting or invalid client configuration options
-  \u{2022} Missing required configuration parameters
 
 \x1b[1mTroubleshooting:\x1b[0m
-  1. Double-check your reqwest::Client setup
-  2. Remove or fix any conflicting builder options
-  3. Make sure all required settings are provided
-  4. Update the tool to the latest version
-  5. Report the issue to the tool maintainer if it persists";
+  1. Wait a few minutes and try again
+  2. Check API status at https://ip-api.com/
+  3. Update the tool to the latest version
+  4. Report the issue to the tool maintainer if it persists";
 
 pub const IS_BODY: &str = "\
 \u{01f4e6} Invalid response body
@@ -65,11 +65,10 @@ pub const IS_BODY: &str = "\
   \u{2022} Headers are incorrect or do not match the body format (e.g., Content-Type does not match)
 
 \x1b[1mTroubleshooting:\x1b[0m
-  1. Make sure the request body is valid (e.g., JSON string, UTF-8 text, or bytes)
-  2. Verify that the Content-Type header matches the body format
-  3. Avoid setting Content-Length manually — let reqwest handle it
-  4. Update the tool to the latest version
-  5. Report the issue to the tool maintainer if it persists";
+  1. Wait a few minutes and try again
+  2. Check API status at https://ip-api.com/
+  3. Update the tool to the latest version
+  4. Report the issue to the tool maintainer if it persists";
 
 pub const IS_REDIRECT: &str = "\
 \u{01f504} Too many redirects
@@ -79,9 +78,10 @@ pub const IS_REDIRECT: &str = "\
   \u{2022} Request exceeded the maximum number of allowed redirects
 
 \x1b[1mTroubleshooting:\x1b[0m
-  1. Adjust the maximum number of allowed redirects in your client
-  2. Manually check redirect URLs to identify loops
-  3. Report the issue to the tool maintainer if it persists";
+  1. Wait a few minutes and try again
+  2. Check API status at https://ip-api.com/
+  3. Update the tool to the latest version
+  4. Report the issue to the tool maintainer if it persists";
 
 pub const IS_DECODE: &str = "\
 \u{01f4c4} Response decoding error
@@ -91,9 +91,10 @@ pub const IS_DECODE: &str = "\
   \u{2022} Data might be corrupted during transmission
 
 \x1b[1mTroubleshooting:\x1b[0m
-  1. Check API status at https://ip-api.com/
-  2. Update the tool to the latest version
-  3. Report the issue to the tool maintainer if it persists";
+  1. Wait a few minutes and try again
+  2. Check API status at https://ip-api.com/
+  3. Update the tool to the latest version
+  4. Report the issue to the tool maintainer if it persists";
 
 pub const API_RATE_LIMIT_EXEEDED: &str = "\
 \u{01f40c} API rate limit exceeded
