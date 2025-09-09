@@ -11,7 +11,7 @@ pub const IS_TIMEOUT: &str = "\
   1. Make sure your internet connection is stable
   2. Check firewall or proxy settings that might block requests
   3. Wait a few minutes and try again
-  4. Verify API status at https://ip-api.com/
+  4. Check API status at https://ip-api.com/
   5. Report the issue to the tool maintainer if it persists";
 
 pub const IS_CONNECT: &str = "\
@@ -25,7 +25,7 @@ pub const IS_CONNECT: &str = "\
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Make sure you have an active internet connection
-  2. Check if http://ip-api.com/json is reachable (browser or terminal)
+  2. Test if http://ip-api.com/json is reachable (browser or terminal)
   3. Restart your router or network adapter
   4. Verify DNS settings or try a different DNS server
   5. Review firewall, VPN, or proxy configurations if applicable
@@ -39,7 +39,8 @@ pub const IS_REQUEST: &str = "\
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Verify the URL format
-  2. Report the issue to the tool maintainer if it persists";
+  2. Update the tool to the latest version
+  3. Report the issue to the tool maintainer if it persists";
 
 pub const IS_BUILDER: &str = "\
 \u{01f6e0} Request builder error
@@ -52,7 +53,8 @@ pub const IS_BUILDER: &str = "\
   1. Double-check your reqwest::Client setup
   2. Remove or fix any conflicting builder options
   3. Make sure all required settings are provided
-  4. Report the issue to the tool maintainer if it persists";
+  4. Update the tool to the latest version
+  5. Report the issue to the tool maintainer if it persists";
 
 pub const IS_BODY: &str = "\
 \u{01f4e6} Invalid response body
@@ -66,7 +68,8 @@ pub const IS_BODY: &str = "\
   1. Make sure the request body is valid (e.g., JSON string, UTF-8 text, or bytes)
   2. Verify that the Content-Type header matches the body format
   3. Avoid setting Content-Length manually — let reqwest handle it
-  4. Report the issue to the tool maintainer if it persists";
+  4. Update the tool to the latest version
+  5. Report the issue to the tool maintainer if it persists";
 
 pub const IS_REDIRECT: &str = "\
 \u{01f504} Too many redirects
@@ -88,8 +91,8 @@ pub const IS_DECODE: &str = "\
   \u{2022} Data might be corrupted during transmission
 
 \x1b[1mTroubleshooting:\x1b[0m
-  1. Verify API status at https://ip-api.com/
-  2. Update this tool to the latest version
+  1. Check API status at https://ip-api.com/
+  2. Update the tool to the latest version
   3. Report the issue to the tool maintainer if it persists";
 
 pub const API_RATE_LIMIT_EXEEDED: &str = "\
@@ -102,19 +105,20 @@ pub const API_RATE_LIMIT_EXEEDED: &str = "\
 \x1b[1mTroubleshooting:\x1b[0m
   1. Wait a few minutes and try again
   2. Consider using a different IP address if possible
-  3. Verify API status at https://ip-api.com/
+  3. Check API status at https://ip-api.com/
   4. Report the issue to the tool maintainer if it persists";
 
 pub const CLIENT_ERROR: &str = "\
 \u{01f464} Client error (%(status_code)d)%(reason)s
 
 \x1b[1mPossible causes:\x1b[0m
-  \u{2022} Invalid or missing request parameters, or unsupported input format
+  \u{2022} API endpoint or access policy may have changed
 
 \x1b[1mTroubleshooting:\x1b[0m
-  1. Verify your input values
-  2. Check the API documentation for allowed formats and constraints
-  3. Report the issue to the tool maintainer if it persists";
+  1. Wait a few minutes and try again
+  2. Check API status at https://ip-api.com/
+  3. Update the tool to the latest version
+  4. Report the issue to the tool maintainer if it persists";
 
 pub const SERVER_ERROR: &str = "\
 \u{01f310} Server error (%(status_code)d)%(reason)s
@@ -124,8 +128,9 @@ pub const SERVER_ERROR: &str = "\
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Wait a few minutes and try again
-  2. Verify API status at https://ip-api.com/
-  3. Report the issue to the tool maintainer if it persists";
+  2. Check API status at https://ip-api.com/
+  3. Update the tool to the latest version
+  4. Report the issue to the tool maintainer if it persists";
 
 pub const UNKNOWN_HTTP_ERROR: &str = "\
 \u{26a0}\u{fe0f} HTTP error (%(status_code)d)%(reason)s
@@ -161,8 +166,8 @@ pub const BODY_READING_ERROR: &str = "\
 
 \x1b[1mTroubleshooting:\x1b[0m
   1. Make sure your internet connection is working properly
-  2. Check if http://ip-api.com/json is reachable (browser or terminal)
-  3. Verify API status at https://ip-api.com/
+  2. Test if http://ip-api.com/json is reachable (browser or terminal)
+  3. Check API status at https://ip-api.com/
   4. Update the tool to the latest version
   5. Report the issue to the tool maintainer if it persists";
 
