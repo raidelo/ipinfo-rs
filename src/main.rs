@@ -12,7 +12,10 @@ mod consts;
 use consts::{ENDPOINT, HOST, TIMEOUT};
 
 mod error_messages;
-use error_messages::{BODY_READING_ERROR, EMPTY_RESPONSE_FROM_SERVER};
+use error_messages::{
+    API_RESPONSE_JSON_PARSING_ERROR, BODY_READING_ERROR, EMPTY_RESPONSE_FROM_SERVER,
+    INVALID_API_RESPONSE_TYPE,
+};
 
 mod reqwest_error_mapping;
 use reqwest_error_mapping::map_reqwest_error;
@@ -68,20 +71,7 @@ async fn run() -> Result<(), Box<dyn Error>> {
             serde_json::error::Category::Io => "Unknown parsing error",
         };
 
-        format!(
-            "\
-\u{01f4c4} Failed to parse API response
-
-\x1b[1mDetail:\x1b[0m {}
- 
-\x1b[1mTroubleshooting:\x1b[0m
-  1. The API service may have changed its response format
-  2. Check API status at https://ip-api.com/
-  3. Update the tool to the latest version
-  4. Report the issue to the tool maintainer if it persists
-",
-            detail
-        )
+        API_RESPONSE_JSON_PARSING_ERROR.replace("%(detail)s", detail)
     })?;
 
     let object = info.as_object().ok_or_else(|| {
@@ -96,20 +86,7 @@ async fn run() -> Result<(), Box<dyn Error>> {
             }
         };
 
-        format!(
-            "\u{01f9e9} Invalid API response type
-
-\x1b[1mExpected:\x1b[0m JSON object
-\x1b[1mReceived:\x1b[0m {}
-
-\x1b[1mTroubleshooting:\x1b[0m
-  1. The API service may have changed its response format
-  2. Check API status at https://ip-api.com/
-  3. Update the tool to the latest version
-  4. Report the issue to the tool maintainer if it persists
-",
-            received
-        )
+        INVALID_API_RESPONSE_TYPE.replace("%(received)s", received)
     })?;
 
     if object.is_empty() {

@@ -131,13 +131,12 @@ pub const UNKNOWN_HTTP_ERROR: &str = "\
 \u{26a0}\u{fe0f} HTTP error (%(status_code)d)%(reason)s
 
 \x1b[1mPossible causes:\x1b[0m
-  \u{2022} Unexpected or unknown HTTP response
-  \u{2022} Network issues or connectivity problems
-  \u{2022} Rare or unsupported status code
+  \u{2022} Unexpected HTTP status code (unsupported)
+  \u{2022} Temporary server issue
 
 \x1b[1mTroubleshooting:\x1b[0m
-  1. Make sure your internet connection is working properly
-  2. Run the command again
+  1. Run the command again
+  2. Check API status at https://ip-api.com/
   3. Update the tool to the latest version
   4. Report the issue to the tool maintainer if it persists";
 
@@ -177,4 +176,33 @@ pub const EMPTY_RESPONSE_FROM_SERVER: &str = "\
 \x1b[1mTroubleshooting:\x1b[0m
   1. Check API status at https://ip-api.com/
   2. Wait a few minutes and try again
+  3. Report the issue to the tool maintainer if it persists";
+
+pub const API_RESPONSE_JSON_PARSING_ERROR: &str = "\
+\u{01f4c4} Failed to parse API response
+
+\x1b[1mDetail:\x1b[0m %(detail)s
+
+\x1b[1mPossible causes:\x1b[0m
+  \u{2022} The API service may have changed its response format
+  \u{2022} Response was not valid JSON (e.g., an ISP login page or HTML error)
+
+\x1b[1mTroubleshooting:\x1b[0m
+  1. Check API status at https://ip-api.com/
+  2. Make sure your internet connection is not behind a login page
+  3. Update the tool to the latest version
+  4. Report the issue to the tool maintainer if it persists";
+
+pub const INVALID_API_RESPONSE_TYPE: &str = "\
+\u{01f9e9} Invalid API response type
+
+\x1b[1mExpected:\x1b[0m JSON object
+\x1b[1mReceived:\x1b[0m %(received)s
+
+\x1b[1mPossible causes:\x1b[0m
+  \u{2022} The API service may have changed its response format
+
+\x1b[1mTroubleshooting:\x1b[0m
+  1. Check API status at https://ip-api.com/
+  2. Update the tool to the latest version
   3. Report the issue to the tool maintainer if it persists";
